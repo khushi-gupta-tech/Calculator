@@ -18,6 +18,14 @@ buttons.forEach(button => {
       try {
         display.value = evaluateExpression(display.value);
         justEvaluated = true;
+
+        // adjust font size 
+         if (display.value.length > 25) {
+          display.style.fontSize = "18px";
+        } else {
+          display.style.fontSize = "25px";
+        }
+
       } catch {
         justEvaluated = false;
       }
@@ -39,10 +47,21 @@ buttons.forEach(button => {
         display.value += value;
       }
 
+
+      display.scrollLeft = display.scrollWidth;
+
+      // Adjust font size based on length
+      if (display.value.length > 25) {
+        display.style.fontSize = "18px";
+      } else {
+        display.style.fontSize = "25px";
+      }
+
       justEvaluated = false;
     }
   });
 });
+
 
 function evaluateExpression(expr) {
   expr = expr.replace(/\b0+(\d+)/g, (_, num) => num); // Remove leading zeros
